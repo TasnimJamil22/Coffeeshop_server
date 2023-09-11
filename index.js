@@ -89,6 +89,19 @@ async function run() {
         res.send(result);
       })
 
+      app.patch('/mycart/:id', async(req,res)=>{
+        const id = req.params.id;
+        const filter = { _id: new ObjectId(id)};
+        const updateDoc = {
+          $set: {
+             status:'confirm'
+          },
+        };
+        const result = await ordersCollection.updateOne(filter,updateDoc);
+        console.log(result);
+        res.send(result);
+      })
+
 
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
